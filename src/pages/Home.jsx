@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const Home = () => {
     setErrors((prev) => ({ ...prev, [`${name}Error`]: "" }));
   };
 
-  const erroValidation = (data) => {
+  const errorValidation = (data) => {
     const newErrors = {};
 
     if (data.title.trim() === "") {
@@ -37,10 +38,13 @@ const Home = () => {
 
   //handle submit
   const handleAddTodo = () => {
-    const validate = erroValidation(formData);
+    const validate = errorValidation(formData);
     if (Object.keys(validate).length) return;
 
     console.log(formData);
+
+    //add success toast message
+    toast.success("Todo added successfully!!");
 
     //reset form
     setFormData({
