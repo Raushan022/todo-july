@@ -6,16 +6,48 @@ const Home = () => {
     description: "",
     tag: "",
   });
+  const [errors, setErrors] = useState({
+    titleError: "",
+    descriptionError: "",
+  });
 
   //handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error for the specific field while typing
+    setErrors((prev) => ({ ...prev, [`${name}Error`]: "" }));
+  };
+
+  const erroValidation = (data) => {
+    const newErrors = {};
+
+    if (data.title.trim() === "") {
+      newErrors.titleError = "Title is required";
+    }
+
+    if (data.description.trim() === "") {
+      newErrors.descriptionError = "Description is required";
+    }
+
+    setErrors(newErrors);
+    return newErrors;
   };
 
   //handle submit
   const handleAddTodo = () => {
+    const validate = erroValidation(formData);
+    if (Object.keys(validate).length) return;
+
     console.log(formData);
+
+    //reset form
+    setFormData({
+      title: "",
+      description: "",
+      tag: "",
+    });
   };
 
   return (
@@ -37,6 +69,9 @@ const Home = () => {
           value={formData.title}
           className=" text-gray-700 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
+        {errors.titleError && (
+          <span className="text-red-700">{errors.titleError}</span>
+        )}
       </div>
 
       {/* Description */}
@@ -52,6 +87,9 @@ const Home = () => {
           value={formData.description}
           className=" text-gray-700 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
         ></textarea>
+        {errors.descriptionError && (
+          <span className="text-red-700">{errors.descriptionError}</span>
+        )}
       </div>
 
       {/* Tag */}
