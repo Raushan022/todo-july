@@ -4,9 +4,12 @@ import App from "./App.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
+import { BrowserRouter } from "react-router";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 );
