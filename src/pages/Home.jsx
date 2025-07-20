@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { addTodo } from "../redux/slices/todoSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -41,6 +45,7 @@ const Home = () => {
     const validate = errorValidation(formData);
     if (Object.keys(validate).length) return;
 
+    dispatch(addTodo(formData));
     console.log(formData);
 
     //add success toast message
