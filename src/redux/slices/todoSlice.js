@@ -17,9 +17,17 @@ const todoSlice = createSlice({
             tag: action.payload.tag
          }
          state.todos.push(newTodo)  // Immer lets us mutate state directly
+      },
+
+      toggleCompleted: (state, action) => {
+         const todoId = action.payload;
+         const todo = state.todos.find((t) => t.id === todoId);
+         if (todo) {
+            todo.isCompleted = !todo.isCompleted
+         }
       }
    }
 })
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, toggleCompleted } = todoSlice.actions;
 export default todoSlice.reducer;
