@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { toggleCompleted } from "../redux/slices/todoSlice";
+import { deleteTodo, toggleCompleted } from "../redux/slices/todoSlice";
+import { toast } from "react-toastify";
 
 const TodoCard = ({ todo }) => {
   const dispatch = useDispatch();
@@ -35,13 +36,28 @@ const TodoCard = ({ todo }) => {
           </p>
         </div>
 
-        <div className="pr-4">
+        <div className="flex items-center pr-2">
           <input
             type="checkbox"
             checked={todo.isCompleted}
             onChange={handleCheckboxChange}
-            className="w-5 h-5 accent-purple-600"
+            className="w-4 h-4 accent-purple-600"
           />
+
+          <button
+            className="ml-4 hover:cursor-pointer transition duration-150"
+            onClick={() => {
+              const confirmDelete = window.confirm(
+                `Are you sure you want to delete "${todo.title}"?`
+              );
+              if (confirmDelete) {
+                dispatch(deleteTodo(todo.id));
+                toast.success("Todo deleted Successfully!");
+              }
+            }}
+          >
+            🗑️
+          </button>
         </div>
       </div>
     </div>
