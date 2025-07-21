@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, toggleCompleted } from "../redux/slices/todoSlice";
 import { toast } from "react-toastify";
@@ -6,9 +6,16 @@ import { toast } from "react-toastify";
 const TodoCard = ({ todo }) => {
   const dispatch = useDispatch();
 
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const handleCheckboxChange = () => {
     dispatch(toggleCompleted(todo.id));
   };
+
+  const handleEdit = () => {
+    setIsEditModalOpen(true);
+  };
+
   return (
     <div className="border border-gray-300 rounded-2xl p-4 shadow-md bg-white hover:shadow-lg transition duration-200">
       <div className="flex justify-between items-center mb-2">
@@ -57,6 +64,13 @@ const TodoCard = ({ todo }) => {
             }}
           >
             🗑️
+          </button>
+
+          <button
+            className="ml-4 hover:cursor-pointer transition duration-150"
+            onClick={handleEdit}
+          >
+            ✏️
           </button>
         </div>
       </div>
