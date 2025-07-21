@@ -69,8 +69,9 @@ const TodoCard = ({ todo }) => {
             </button>
 
             <button
-              className="ml-4 hover:cursor-pointer transition duration-150"
+              className="ml-4 hover:cursor-pointer transition duration-150 disabled:cursor-not-allowed"
               onClick={() => setIsEditModalOpen(true)}
+              disabled={todo.isCompleted}
             >
               ✏️
             </button>

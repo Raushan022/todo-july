@@ -58,13 +58,13 @@ const EditTodoModal = ({ todo, onClose }) => {
         <div className="flex justify-end gap-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+            className="px-4 py-2 bg-red-400 rounded hover:bg-red-500"
           >
             Cancel
           </button>
           <button
             onClick={handleUpdate}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
           >
             Update
           </button>
